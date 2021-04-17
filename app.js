@@ -37,11 +37,16 @@ const showResult = (sortedFiles,maxSize) => {
 const main = () => { 
     let max = 0
     let files = []
-    for (let i = 0; i < args.length; i++) {
-        var content = fs.readFileSync(args[i], 'binary');
-        files.push({ name: args[i], content,offset:0 })
-        console.log(content[2900])
+    try {
+       for (let i = 0; i < args.length; i++) {
+        var content = fs.readFileSync(args[i], 'binary')
+        files.push({ name: args[i], content,offset:0 }) 
+    } 
+    } catch (error) {
+        console.log(" File not found!!")
+        return;
     }
+    
     //Sorts files by content size
     let sortedFiles = files.sort((a, b) => a.content.length - b.content.length);
 
@@ -62,7 +67,7 @@ const main = () => {
                 for (let j = 0; j < sortedFiles.length; j++) {
                     sortedFiles[j].offset = sortedFiles[j].content.indexOf(item)
                     sortedFiles[j].common_word = item
-                }
+                } 
                 max = item.length
             }
         });
