@@ -9,6 +9,14 @@ Option 2 - Core Software Engineering
 Install NodeJS on your computer from this [link](https://nodejs.dev/) 
 
 
+## Algorithm Steps
+
+- Checks args if args at least 2 file - line 80
+- Reads the existing file, throw error if file does not exist - line 41:49
+- Sorts files by content length - 52
+- Keeps the shortest file as the common string size can be the maximum this file size. - line 55
+- Check max  possible combination in loop and find the max length  - line 60:75
+
 ## Usage
 
 ```bash 
