@@ -36,6 +36,7 @@ const showResult = (sortedFiles, maxSize) => {
     }
 }
 const main = () => {
+
     let max = 0
     let files = []
     try {
@@ -58,9 +59,11 @@ const main = () => {
     let hasBoth = true
     for (let i = 0; i < len; i++) {
         let combination = getCombinations(base.content, i * SEPARETE + max, (i + 1) * SEPARETE, max)
-        combination.forEach(item => {
-            hasBoth = sortedFiles.filter(e => e.content.indexOf(item) != -1).length < sortedFiles.length || item.length <= max ? false : true
+        combination.forEach(item => { 
+            //set true if all files include the item and item length
+            hasBoth = sortedFiles.filter(e => e.content.indexOf(item) != -1).length < sortedFiles.length || item.length < max ? false : true
             if (hasBoth) {
+                // change sortedFiles array to new ofsset and new longest string values
                 sortedFiles = sortedFiles.map(e => {
                     e.offset = e.content.indexOf(item);
                     e.common_word = item;
@@ -70,6 +73,7 @@ const main = () => {
             }
         });
     }
+
     base.offset = base.content.indexOf(sortedFiles[0].common_word)
     sortedFiles.push(base)
     showResult(sortedFiles, max)
